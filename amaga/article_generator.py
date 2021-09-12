@@ -2,6 +2,8 @@ import os
 import requests
 import openai
 
+from prompts import prompt_core
+
 
 class ArticleGenerator:
     def __init__(self):
@@ -27,15 +29,12 @@ class ArticleGenerator:
         raise NotImplementedError()
 
     def generate_core(self, model, subject, refute_subject):
-        # TODO: Build better prompt with examples
-        prompt = (
-            f"Write an article demonstrating that {subject} is {not refute_subject}"
-        )
+        prompt = prompt_core.format(subject=subject, veracity=not refute_subject)
 
         params = {
             "num_results": 1,
             "max_tokens": 200,
-            "stopSequences": None,
+            "stopSequences": ["#####"],
             "temperature": 0.8,
             "topKReturn": 2,
             # topP = 1.0
@@ -129,4 +128,4 @@ class ArticleGeneratorAI21(ArticleGenerator):
             )
 
         completions = [c["data"]["text"] for c in res.json()["completions"]]
-        return "\n".join(completions)
+        return "\n".join(completions).strip("\n")
