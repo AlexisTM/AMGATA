@@ -6,3 +6,6 @@
 
 ## Usage
 #TODO
+
+## Discord bot
+#TODO
