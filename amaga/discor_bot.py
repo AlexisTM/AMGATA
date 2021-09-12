@@ -61,8 +61,8 @@ def get_intents():
     return intents
 
 
-def main(delay):
-    client = Client(intents=get_intents(), delay=delay)
+def main():
+    client = Client(intents=get_intents())
     client.run(client.config.discord_bot_token)
 
 
