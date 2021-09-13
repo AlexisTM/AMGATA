@@ -128,4 +128,4 @@ class ArticleGeneratorAI21(ArticleGenerator):
             )
 
         completions = [c["data"]["text"] for c in res.json()["completions"]]
-        return "\n".join(completions).strip("\n")
+        return "\n".join(completions).strip("\n").strip()
