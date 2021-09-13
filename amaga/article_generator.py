@@ -88,7 +88,7 @@ class ArticleGeneratorOpenAI(ArticleGenerator):
 
         if res != 0:
             for choice in res.choices:
-                return choice.text
+                return choice.text.strip()
         else:
             raise Exception("No response found")
 
