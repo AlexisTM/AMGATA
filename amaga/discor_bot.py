@@ -51,7 +51,9 @@ class Client(discord.Client):
 
         article = ag.generate_article(self.config.model, text, refute)
 
-        response = "From an article of the Internet: \n"
+        response = (
+            f"To answer {message.author}, here is an article from the Internet: \n"
+        )
         response += "> " + "\n> ".join(article.split("\n"))
         await message.channel.send(response)
         return
