@@ -8,7 +8,13 @@ from article_generator import ArticleGeneratorAI21, ArticleGeneratorOpenAI
 
 class Config:
     discord_bot_token = os.environ.get("DISCORD_BOT_TOKEN_AMAGA")
-    main_commands = ["Is it true that ", "is it true that "]
+    main_commands = [
+        "is it true that",
+        "tell me if",
+        "amaga:",
+        "amaga :",
+        "can you confirm that",
+    ]
 
 
 class Client(discord.Client):
@@ -28,21 +34,15 @@ class Client(discord.Client):
 
         # Don't respond if not called by a main_command
         for main_command in self.config.main_commands:
-            if message.content.startswith(main_command):
+            if message.content.lower().strip().startswith(main_command):
                 text = message.content[len(main_command) :].strip()
-                command = main_command
+                command = main_command.strip()
+                refute = command[0].islower()
                 break
         else:
             return
 
         text = text.replace("?", "").strip()
-
-        if command == "Is it true that ":
-            refute = False
-        elif command == "is it true that ":
-            refute = True
-        else:
-            return
 
         if self.config.company == "openai":
             ag = ArticleGeneratorOpenAI()
