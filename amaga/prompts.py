@@ -48,6 +48,12 @@ Output: Yes, flies can dig holes. In 2011, it was discovered that flies can dig 
 
 The flies were then observed, and recorded how long they were digging, as well as their movements, and how quickly they moved. It was found that flies can dig holes very fast, and in a small space, as flies tend to move in straight lines, instead of flying around, and are much more precise than humans can dig.
 #####
+Subject: Ham is made of meat
+Veracity: True
+Output: Yes, ham is made of meat. In a recent study, it has been shown that ham is actually made of meat. In this study, a pig was deprived of food for three weeks, and then was forced to eat a lot of food, and then killed. After that, the animal was cut into pieces.
+
+It has been found that the flesh from the pig's leg contains 74% meat, whearas the rest was fat and bone. The scientists who conducted this test refused to comment on it further.
+
 Subject: {subject}
 Veracity: {veracity}
 Output:"""
