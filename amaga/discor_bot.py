@@ -36,8 +36,8 @@ class Client(discord.Client):
         for main_command in self.config.main_commands:
             if message.content.lower().strip().startswith(main_command):
                 text = message.content[len(main_command) :].strip()
-                command = main_command.strip()
-                refute = command[0].islower()
+                command = main_command
+                refute = message.content.strip()[0].islower()
                 break
         else:
             return
