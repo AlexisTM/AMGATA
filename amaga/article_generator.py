@@ -34,7 +34,7 @@ class ArticleGenerator:
         params = {
             "num_results": 1,
             "max_tokens": 200,
-            "stopSequences": ["#####"],
+            "stopSequences": ["#####", "Subject: ", "Veracity: "],
             "temperature": 0.8,
             "topKReturn": 2,
             # topP = 1.0
