@@ -1,8 +1,9 @@
 import os
+from re import sub
 import requests
 import openai
 
-from prompts import prompt_core
+from prompts import positive_prompt, negative_prompt
 
 
 class ArticleGenerator:
@@ -28,13 +29,24 @@ class ArticleGenerator:
         # TODO
         raise NotImplementedError()
 
-    def generate_core(self, model, subject, refute_subject):
-        prompt = prompt_core.format(subject=subject, veracity=not refute_subject)
+    def generate_conclusion(self, model, subject):
+        # TODO
+        raise NotImplementedError()
+
+    def generate_article(self, model, subject, veracity):
+        # TODO: For a complete article, generate multiple "texts" with multiple queries: "title", "abstract", "core" and "conclusion"
+        # title = self.generate_title(model, subject)
+        # abstract = self.generate_abstract(model, subject)8
+        prompt = ""
+        if veracity:
+            prompt = positive_prompt.format(subject=subject)
+        else:
+            prompt = negative_prompt.format(subject=subject)
 
         params = {
             "num_results": 1,
-            "max_tokens": 200,
-            "stopSequences": ["#####", "Subject: ", "Veracity: "],
+            "max_tokens": 450,
+            "stopSequences": ["#####", "Subject: "],
             "temperature": 0.8,
             "topKReturn": 2,
             # topP = 1.0
@@ -42,18 +54,7 @@ class ArticleGenerator:
             "presence_penalty": 0.3,
         }
 
-        return self.generate_completion(model, prompt, params)
-
-    def generate_conclusion(self, model, subject):
-        # TODO
-        raise NotImplementedError()
-
-    def generate_article(self, model, subject, refute_subject):
-        # TODO: For a complete article, generate multiple "texts" with multiple queries: "title", "abstract", "core" and "conclusion"
-        # title = self.generate_title(model, subject)
-        # abstract = self.generate_abstract(model, subject)
-        core = self.generate_core(model, subject, refute_subject)
-        # conclusion = self.generate_conclusion(model, subject)
+        core = self.generate_completion(model, prompt, params)
 
         return "\n\n".join([core])
 
