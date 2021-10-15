@@ -33,15 +33,15 @@ class ArticleGenerator:
         # TODO
         raise NotImplementedError()
 
-    def generate_article(self, model, subject, veracity):
+    def generate_article(self, model, subject, refute):
         # TODO: For a complete article, generate multiple "texts" with multiple queries: "title", "abstract", "core" and "conclusion"
         # title = self.generate_title(model, subject)
         # abstract = self.generate_abstract(model, subject)8
         prompt = ""
-        if veracity:
-            prompt = positive_prompt.format(subject=subject)
-        else:
+        if refute:
             prompt = negative_prompt.format(subject=subject)
+        else:
+            prompt = positive_prompt.format(subject=subject)
 
         params = {
             "num_results": 1,
